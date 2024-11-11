@@ -1,11 +1,8 @@
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import Response
 from rest_framework.views import APIView, Request
 from .serializer import CreateUserSerializer
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.core.exceptions import ObjectDoesNotExist
 
 
 class CreateUser(APIView):
