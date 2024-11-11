@@ -1,14 +1,13 @@
 from pika import BlockingConnection, ConnectionParameters
 from pymongo import MongoClient
-# import json
+import json
 
 
 def callback(ch, method, properties, body):
     print(f"{body}")
     clien_db = MongoClient("localhost", 27017)
     db = clien_db["usersdb"]
-    # body = json.loads(body)
-    db.users.insert_one(body)
+    db.users.insert_one(json.loads(body))
     data = db.users.find_one()
     return data
 
