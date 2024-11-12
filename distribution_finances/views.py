@@ -10,6 +10,9 @@ import json
 class DistributionFinances(APIView):
     def post(self, requst: Request):
         print(requst.data)
+        if "number_children" not in requst.data:
+            requst.data["number_children"] = 0
+        requst.data["_id"] = requst.user.username
         serializer = DistrFinancesSerializer(data=requst.data)
         print(serializer.is_valid())
         if serializer.is_valid():
