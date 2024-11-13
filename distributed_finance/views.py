@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from rest_framework import status
+from rest_framework.views import Response
+from rest_framework.views import APIView, Request
+from distribution_finances.serializer import DistrFinancesSerializer
+import json
+from pymongo import MongoClient
 
-# Create your views here.
+
+class DistributedFinance(APIView):
+    def get(self, request: Request):
+        client = MongoClient("localhost", 27017)
+        usersdb = client["usersdb"]
+        user = usersdb.users.find_one({"_id": request.user.username})
+        serializer = DistrFinancesSerializer(data=user)
+        print(serializer.is_valid())
+        if serializer.is_valid():
+            finances = usersdb.finances.find_one(
+                {"_id": request.user.username}
+                )
+            return Response(
+                {"data": [serializer.data, finances]},
+                status.HTTP_302_FOUND
+            )
+        return Response(serializer.errors)

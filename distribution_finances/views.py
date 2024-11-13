@@ -6,6 +6,7 @@ from .producer import send_data
 import json
 
 
+
 class DistributionFinances(APIView):
     def post(self, requst: Request):
         print(requst.data)
