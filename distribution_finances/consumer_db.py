@@ -26,10 +26,11 @@ async def main():
     connection = await aio_pika.connect_robust()
     async with connection:
         channel = await connection.channel()
-        queue = await channel.declare_queue("database")
+        queue = await channel.declare_queue("database", auto_delete=True)
         async with queue.iterator() as queue_iter:
             async for message in queue_iter:
                 await callback(message.body)
+                queue = await channel.declare_queue(exclusive=True)
 
 if __name__ == "__main__":
     print("Брокер запущен")

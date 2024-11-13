@@ -6,7 +6,7 @@ import json
 def send_data(msg):
     connection = BlockingConnection(ConnectionParameters('localhost'))
     channel = connection.channel()
-    channel.queue_declare(queue='database')
+    # channel.queue_declare(queue='database')
     
     channel.basic_publish(
         exchange='',
