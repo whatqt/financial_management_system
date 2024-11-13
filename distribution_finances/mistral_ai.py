@@ -29,15 +29,14 @@ async def get_info_ai(content):
             data += chunk.data.choices[0].delta.content
 
     data = json.loads(data)
-    print(data)
     data["_id"] = content["_id"]
-    print(data)
     clien_db = AsyncMongoClient("localhost", 27017)
     usersdb = clien_db["usersdb"]
     print(data)
-    await usersdb.finances.insert_one(data)
+    old_data = await usersdb.finances.find_one({"_id": content["_id"]})
+    await usersdb.finances.replace_one(old_data, data, upsert=True)
     print("Данные о бюджете были добавлены")
-
+    # пересмотреть решение про replace_one, так как нужно разделять ответственности
 
     
 
