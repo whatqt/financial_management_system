@@ -10,11 +10,6 @@
 - Library for tests: UnitTest
 - Library for mistral.ai: mistralai
 
-**Схема работы приложения.**
-
-
-![alt text](image.png)
-
 **Запуск приложения.**
 1. Создать виртуальную среду и клонировать репозиторий.
 2. Установить зависимости из requirements.txt
