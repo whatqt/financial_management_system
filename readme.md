@@ -11,7 +11,7 @@
 - Library for mistral.ai: mistralai
 
 **Схема работы приложения.**
-![[Financial management system.drawio.png]]
+![alt text](image.png)
 
 **Запуск приложения.**
 1. Создать виртуальную среду и клонировать репозиторий.
