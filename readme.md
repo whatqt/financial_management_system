@@ -11,6 +11,8 @@
 - Library for mistral.ai: mistralai
 
 **Схема работы приложения.**
+
+
 ![alt text](image.png)
 
 **Запуск приложения.**
