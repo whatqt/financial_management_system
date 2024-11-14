@@ -10,12 +10,9 @@ import json
 
 class DistributionFinances(APIView):
     def post(self, request: Request):
-        print("РАБОТАЕТ")
         print(request.data)
-
         request.data["_id"] = request.user.username
         print(request.data)
-        # return Response("test", status.HTTP_201_CREATED)
         serializer = DistrFinancesSerializer(data=request.data)
         print(serializer.is_valid())
         if serializer.is_valid():
