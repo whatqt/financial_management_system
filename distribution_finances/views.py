@@ -10,10 +10,12 @@ import json
 
 class DistributionFinances(APIView):
     def post(self, request: Request):
+        print("РАБОТАЕТ")
+        print(request.data)
+
         request.data["_id"] = request.user.username
-        if request.user.is_anonymous:
-            request.data["_id"] = "unit_test"
-            # убрать костыль, узнать подробней про тесты для REST API
+        print(request.data)
+        # return Response("test", status.HTTP_201_CREATED)
         serializer = DistrFinancesSerializer(data=request.data)
         print(serializer.is_valid())
         if serializer.is_valid():
