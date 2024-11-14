@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.views import Response
 from rest_framework.views import APIView, Request
+from django.http import HttpRequest
 from .serializer import DistrFinancesSerializer
 from .producer import send_data
 import json
@@ -8,10 +9,12 @@ import json
 
 
 class DistributionFinances(APIView):
-    def post(self, requst: Request):
-        print(requst.data)
-        requst.data["_id"] = requst.user.username
-        serializer = DistrFinancesSerializer(data=requst.data)
+    def post(self, request: Request):
+        request.data["_id"] = request.user.username
+        if request.user.is_anonymous:
+            request.data["_id"] = "unit_test"
+            # убрать костыль, узнать подробней про тесты для REST API
+        serializer = DistrFinancesSerializer(data=request.data)
         print(serializer.is_valid())
         if serializer.is_valid():
             print(serializer.validated_data)

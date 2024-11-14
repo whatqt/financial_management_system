@@ -14,10 +14,6 @@ async def callback(body):
     #     async with session.start_transaction():
     #         await db.users.insert_one(body, session=session)
     # сессии невозможно использовать, так как надо запустить сервер на реплике. Решение есть, но стоит ли оно того?
-    # data = await db.users.find_one({"_id": body["_id"]})
-    # if data:
-    #     print("Данные были не были занесены, так как такая запись уже есть")
-    #     return
     await db.users.replace_one(body, body,upsert=True)
     print("Данные были успешно занесены в Базу данных")
     await get_info_ai(body)
