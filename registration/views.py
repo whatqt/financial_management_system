@@ -11,11 +11,10 @@ class CreateUser(APIView):
         serializer = CreateUserSerializer(data=request.data)
         print(serializer.is_valid())
         if serializer.is_valid():
-            user = User.objects.create_user(
+            User.objects.create_user(
                 username=serializer.data["username"],
                 password=serializer.data["password"],
             )
-            print(user)
             return Response({"status": "User created"}, status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
