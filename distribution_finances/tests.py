@@ -29,3 +29,5 @@ class TestDistributionFinances(TestCase):
         view = DistributionFinances.as_view()
         response = view(request)
         self.assertEqual(response.status_code, 201)
+
+# переписать тесты

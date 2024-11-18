@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from os import getenv
+from .service import ConnectionRebbitMq, ConnectionMongoDB, \
+    AsyncConnectionRebbitMq
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,6 +90,11 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+# CONNECTION_RABBITMQ = BlockingConnection(ConnectionParameters('localhost'))
+CONNECTION_RABBITMQ = ConnectionRebbitMq().connect()
+ASYNC_CONNECTION_RABBITMQ = AsyncConnectionRebbitMq().connect()
+CONNECTION_MONGODB = ConnectionMongoDB().connect()
 
 
 # Password validation

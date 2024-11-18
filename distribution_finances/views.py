@@ -3,7 +3,7 @@ from rest_framework.views import Response
 from rest_framework.views import APIView, Request
 from django.http import HttpRequest
 from .serializer import DistrFinancesSerializer
-from .producer import send_data
+from .producer import SendData
 import json
 
 
@@ -13,6 +13,7 @@ class DistributionFinances(APIView):
         request.data["_id"] = request.user.username
         serializer = DistrFinancesSerializer(data=request.data)
         if serializer.is_valid():
-            send_data(json.dumps(serializer.validated_data))
+            data = SendData(serializer.validated_data)
+            data.send_data()
             return Response({"data": serializer.data}, status.HTTP_201_CREATED)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
