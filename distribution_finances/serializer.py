@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from .service import ValidateType
+from .decorators import check_type
 
 
 
@@ -11,23 +13,17 @@ class DistrFinancesSerializer(serializers.Serializer):
     number_children = serializers.IntegerField()
     flat_or_house = serializers.CharField()
 
-    def validate_puprose(self, value):
-        values_validate = ["накопление", "распределение"]
-        if value in values_validate:
-            return value
-        else: raise serializers.ValidationError(f"value {value} is not in {values_validate}")
+    @check_type
+    def validate_purpose(self, value):
+        pass
 
+    @check_type    
     def validate_family(self, value):
-        values_validate = ["женат", "не женат"]
-        if value not in values_validate:
-            raise serializers.ValidationError(f"value {value} is not in {values_validate}")            
-        return value 
-
+        pass
+    
+    @check_type
     def validate_flat_or_house(self, value):
-        values_validate = ["квартира", "дом"]
-        if value not in values_validate:
-            raise serializers.ValidationError(f"value {value} is not in {values_validate}")
-        return value
+        pass
 
 
 # добавить из producer функцию send_data
