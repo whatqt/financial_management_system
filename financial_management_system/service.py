@@ -1,5 +1,5 @@
 from pika import BlockingConnection, ConnectionParameters
-from pymongo import AsyncMongoClient
+from pymongo import AsyncMongoClient, MongoClient
 from aio_pika import connect as aio_connect
 
 
@@ -21,10 +21,18 @@ class AsyncConnectionRebbitMq:
         except Exception as e:
             raise e
 
-class ConnectionMongoDB:
+class AsyncConnectionMongoDB:
     def connect(self):
         try:
             connection = AsyncMongoClient("localhost", 27017)
+            return connection
+        except Exception as e:
+            raise e
+
+class ConnectionMongoDB:
+    def connect(self):
+        try:
+            connection = MongoClient("localhost", 27017)
             return connection
         except Exception as e:
             raise e

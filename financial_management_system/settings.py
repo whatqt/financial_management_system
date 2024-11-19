@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from os import getenv
 from .service import ConnectionRebbitMq, ConnectionMongoDB, \
-    AsyncConnectionRebbitMq
+    AsyncConnectionRebbitMq, AsyncConnectionMongoDB
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -94,6 +94,7 @@ DATABASES = {
 # CONNECTION_RABBITMQ = BlockingConnection(ConnectionParameters('localhost'))
 CONNECTION_RABBITMQ = ConnectionRebbitMq().connect()
 ASYNC_CONNECTION_RABBITMQ = AsyncConnectionRebbitMq().connect()
+ASYNC_CONNECTION_MONGODB = AsyncConnectionMongoDB().connect()
 CONNECTION_MONGODB = ConnectionMongoDB().connect()
 
 
