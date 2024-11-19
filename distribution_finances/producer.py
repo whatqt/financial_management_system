@@ -17,13 +17,11 @@ class SendData:
         self.connection = CONNECTION_RABBITMQ
     
     def send_data(self):
-        serialized_msg = SerializationMsg(self.msg)
-        msg = serialized_msg.serialization_msg()
         channel = self.connection.channel()
         channel.basic_publish(
             exchange='',
             routing_key='database',
-            body=msg
+            body=self.msg
         )
 
         print("Сообщение было отправлено в брокер для бд")

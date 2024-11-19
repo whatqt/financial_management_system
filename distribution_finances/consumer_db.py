@@ -3,14 +3,14 @@ import asyncio
 from sys import path
 path.append('..')
 from financial_management_system.settings import \
-    CONNECTION_MONGODB, ASYNC_CONNECTION_RABBITMQ
+    ASYNC_CONNECTION_MONGODB, ASYNC_CONNECTION_RABBITMQ
 from mistral_ai import MistralAI, SaveAnswer
 
 
 
 async def callback(body):
     body = json.loads(body)
-    db = CONNECTION_MONGODB["usersdb"]
+    db = ASYNC_CONNECTION_MONGODB["usersdb"]
     print(body)
     # async with await clien_db.start_session() as session:
     #     async with session.start_transaction():

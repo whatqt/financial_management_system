@@ -1,7 +1,7 @@
 import json
 import os
 from mistralai import Mistral
-from financial_management_system.settings import CONNECTION_MONGODB
+from financial_management_system.settings import ASYNC_CONNECTION_MONGODB
 
 
 
@@ -58,7 +58,7 @@ class SaveAnswer:
     async def save(self):
         # мб разделить это на два класса: сохранение данных и их редактирование
         # ибо бд даёт дополнительную зависимость (проверить информацию об этом)
-        clien_db = CONNECTION_MONGODB
+        clien_db = ASYNC_CONNECTION_MONGODB
         usersdb = clien_db["usersdb"]
         await self.__change_answer()
         old_data = await usersdb.finances.find_one({"_id": self.id})
