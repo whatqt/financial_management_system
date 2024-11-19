@@ -3,22 +3,18 @@ from rest_framework.views import Response
 from rest_framework.views import APIView, Request
 from distribution_finances.serializer import DistrFinancesSerializer
 from pymongo import MongoClient
+from .service import UserData, FinancesData
 
 
 
 class DistributedFinance(APIView):
     def get(self, request: Request):
-        client = MongoClient("localhost", 27017)
-        usersdb = client["usersdb"]
-        user = usersdb.users.find_one({"_id": request.user.username})
-        serializer = DistrFinancesSerializer(data=user)
+        user_data = UserData(request.user.username).get_data()
+        serializer = DistrFinancesSerializer(data=user_data)
         if serializer.is_valid():
-            finances = usersdb.finances.find_one(
-                {"_id": request.user.username}
-            )
-            
+            finances_data = FinancesData(request.user.username).get_data()
             return Response(
-                {"data": [serializer.data, finances]},
+                {"data": [serializer.data, finances_data]},
                 status.HTTP_302_FOUND
             )
         return Response(serializer.errors, status.HTTP_404_NOT_FOUND)
