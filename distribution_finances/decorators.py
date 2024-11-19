@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .service import ValidateType
 
 
+
 def check_type(func):
     def wrapper(self, *args, **kwargs):
         value = args[0]
@@ -14,8 +15,6 @@ def check_type(func):
             raise serializers.ValidationError(
                 f"value {value} is not in {values_validate}"
             )
-        
-        # func(self, value)
         return value
     
     return wrapper

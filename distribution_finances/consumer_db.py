@@ -1,9 +1,9 @@
-import aio_pika
 import json
 import asyncio
 from sys import path
 path.append('..')
-from financial_management_system.settings import CONNECTION_MONGODB, ASYNC_CONNECTION_RABBITMQ
+from financial_management_system.settings import \
+    CONNECTION_MONGODB, ASYNC_CONNECTION_RABBITMQ
 from mistral_ai import MistralAI, SaveAnswer
 
 
@@ -23,7 +23,6 @@ async def callback(body):
     print(answer)
     save_answer = SaveAnswer(answer, body["_id"])
     await save_answer.save()
-    # await get_info_ai(body)
     
 async def main():
     connection = await ASYNC_CONNECTION_RABBITMQ

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from json import dumps
 
 
+
 class TestDistributionFinances(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="unit_test", password="password")
