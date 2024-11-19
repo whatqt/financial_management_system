@@ -9,12 +9,13 @@ def check_type(func):
         validate_type = ValidateType()
         methods = validate_type.methods()
         values_validate = methods[name.split("_", 1)[1]]()
-        print("ОНО РАБОТАЕТ")
         print(values_validate)
         if value not in values_validate:
             raise serializers.ValidationError(
                 f"value {value} is not in {values_validate}"
             )
+        
+        # func(self, value)
         return value
-        func(self, value)
+    
     return wrapper
