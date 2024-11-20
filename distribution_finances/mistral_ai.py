@@ -1,14 +1,15 @@
 import json
 import os
 from mistralai import Mistral
-from financial_management_system.settings import ASYNC_CONNECTION_MONGODB
+from financial_management_system.settings import \
+    ASYNC_CONNECTION_MONGODB, API_KEY_AI
 
 
 
 class MistralAI:
     def __init__(self, content):
         self.content = content
-        self.api_key_ai = os.getenv("MISTRAL_API_KEY")
+        self.api_key_ai = API_KEY_AI
         self.__model_ai = "mistral-large-latest"
 
     async def __promt_ai(self, content):

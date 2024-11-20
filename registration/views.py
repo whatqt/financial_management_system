@@ -4,7 +4,6 @@ from rest_framework.views import APIView, Request
 from .serializer import CreateUserSerializer
 from .service import UserService
 from django.contrib.auth.models import User
-from django.db.utils import OperationalError
 
 
 
