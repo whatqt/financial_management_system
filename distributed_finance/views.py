@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.views import Response
 from rest_framework.views import APIView, Request
-from distribution_finances.serializer import DistrFinancesSerializer
+from distribution_finances.serializer import DistributionFinancesSerializer
 from pymongo import MongoClient
 from .service import UserData, FinancesData
 
@@ -10,7 +10,9 @@ from .service import UserData, FinancesData
 class DistributedFinance(APIView):
     def get(self, request: Request):
         user_data = UserData(request.user.username).get_data()
-        serializer = DistrFinancesSerializer(data=user_data)
+        serializer = DistributionFinancesSerializer(
+            data=user_data
+        )
         if serializer.is_valid():
             finances_data = FinancesData(request.user.username).get_data()
             return Response(

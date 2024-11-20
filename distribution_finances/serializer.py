@@ -4,7 +4,7 @@ from .decorators import check_type
 
 
 
-class DistrFinancesSerializer(serializers.Serializer):
+class DistributionFinancesSerializer(serializers.Serializer):
     _id = serializers.CharField()
     income = serializers.IntegerField()
     purpose = serializers.CharField()
