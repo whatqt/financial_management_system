@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from .service import ValidateType
 from .decorators import check_type
 
 

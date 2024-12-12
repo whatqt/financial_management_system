@@ -5,6 +5,7 @@ from .views import DistributedFinance
 from django.contrib.auth.models import User
 
 
+
 class TestDistributedFinance(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="unit_test", password="password")

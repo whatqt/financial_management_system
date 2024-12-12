@@ -18,6 +18,7 @@ class SendData:
     
     def send_data(self):
         channel = self.connection.channel()
+        channel.queue_declare(queue="database")
         channel.basic_publish(
             exchange='',
             routing_key='database',

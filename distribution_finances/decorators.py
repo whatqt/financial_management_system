@@ -15,5 +15,4 @@ def check_type(func):
                 f"value {value} is not in {values_validate}"
             )
         return value
-    
     return wrapper
