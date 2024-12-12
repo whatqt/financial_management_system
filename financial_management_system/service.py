@@ -16,7 +16,7 @@ class ConnectionRebbitMq:
 class AsyncConnectionRebbitMq:
     async def connect(self):
         try:
-            connection = await aio_connect()
+            connection = await aio_connect(heartbeat=60)
             return connection
         except Exception as e:
             raise e
