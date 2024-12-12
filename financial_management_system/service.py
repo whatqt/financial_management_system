@@ -8,7 +8,8 @@ from aio_pika import connect as aio_connect
 class ConnectionRebbitMq:
     def connect(self):
         try:
-            connection = BlockingConnection(ConnectionParameters('localhost'))
+            connection = BlockingConnection(ConnectionParameters('localhost', heartbeat=10))
+            print(connection)
             return connection
         except Exception as e:
             raise e
@@ -16,7 +17,8 @@ class ConnectionRebbitMq:
 class AsyncConnectionRebbitMq:
     async def connect(self):
         try:
-            connection = await aio_connect(heartbeat=60)
+            connection = await aio_connect(heartbeat=10)
+            print(connection)
             return connection
         except Exception as e:
             raise e
